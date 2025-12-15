@@ -11,13 +11,20 @@ class Cliente:
         # Lista vazia para armazenar as contas associadas ao cliente
         self.contas = []
 
-        def adicionar_conta(self, conta):
+    def adicionar_conta(self, conta):
 
-            # Insere o objeto conta na lista de contas
-            self.contas.append(conta)
+        # Insere o objeto conta na lista de contas
+        self.contas.append(conta)
 
-        # Método especial que define a representação em string do objeto
-        def __str__(self):
+    # Método especial que define a representação em string do objeto
+    def __str__(self):
 
-            # Retorna uma string formatada com nome e CPF do cliente
-            return f"Cliente {self.nome} (CPF: {self.cpf})"
+        # Retorna uma string formatada com nome e CPF do cliente
+        return f"Cliente {self.nome} (CPF: {self.cpf})"
+
+
+# ================= TESTE =================
+if __name__ == "__main__":
+
+    jorge = Cliente("Jorge", "768.685.987-98")
+    print(jorge)
