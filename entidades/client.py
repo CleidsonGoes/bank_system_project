@@ -1,8 +1,12 @@
-# Aplicação Full-Stack de Sistema Bancário em Python com Programação Orientada a Objetos
+""" Aplicação Full-Stack de Sistema Bancário em Python com
+Programação Orientada a Objetos"""
+
 
 # Módulo da Entidade Cliente
-
 class Cliente:
+    """
+    Docstring for Cliente
+    """
 
     def __init__(self, nome: str, cpf: str):
 
@@ -12,6 +16,9 @@ class Cliente:
         self.contas = []
 
     def adicionar_conta(self, conta):
+        """
+        Docstring for adicionar_conta
+        """
 
         # Insere o objeto conta na lista de contas
         self.contas.append(conta)
