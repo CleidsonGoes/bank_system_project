@@ -105,7 +105,7 @@ class Conta(ABC):
 
 
 # Subclasse
-class ContaCorrent(Conta):
+class ContaCorrente(Conta):
 
     """
     Subclasse que representa uma conta corrente.
@@ -143,6 +143,35 @@ class ContaCorrent(Conta):
                                          "Saldo e limite insuficientes.")
 
         # Deduz o valor do saque do saldo
+        self._saldo -= valor
+
+        # Registra a transação no histórico
+        self._historico.append((datetime.now(), f"Saque de R$ {valor:.2f}"))
+        print(f"Saque de R$ {valor:.2f} realizado com sucesso.")
+
+
+class ContaPoupanca(Conta):
+
+    """Subclasse que representa uma conta poupança."""
+
+    # Construtor da poupança, herda do construtor base
+    def __init__(self, numero: int, cliente):
+
+        super().__init__(numero, cliente)
+
+    # Implementação do método sacar apenas com saldo disponível
+    def sacar(self, valor: float):
+
+        # Permite saque apenas se houver saldo suficiente na conta.
+        if valor <= 0:
+            print("Valor de saque inválido.")
+            return
+
+        # Verifica se há saldo suficiente
+        if valor > self._saldo:
+            raise SaldoInsuficienteError(self._saldo, valor)
+
+        # Deduz o valor do saldo
         self._saldo -= valor
 
         # Registra a transação no histórico
