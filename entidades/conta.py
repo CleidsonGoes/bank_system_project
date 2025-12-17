@@ -1,3 +1,7 @@
+"""
+Aqui está a super classe conta e as suas subclasse
+"""
+
 # Módulo que define as classes de Conta (Abstrata, corrente e poupança.)
 
 # Importa a classe base abstrata e o decorador para métodos abstratos
@@ -6,11 +10,11 @@ from abc import ABC, abstractmethod
 # Importa a classe datetime para registrar data e hora das transações
 from datetime import datetime
 
-#
-# from utilitarios.exceptions import SaldoInsuficienteError
+# Importa exceção personalizada para saldo insuficiente
+from utilitarios.exceptions import SaldoInsuficienteError
 
 
-# A classe abstrata Conta serve como base para outros tipos de contas
+# Classe abstrata "Super classe" Conta serve c/ base p/ outros tipos de contas
 class Conta(ABC):
     """
     Classe base abstrata para contas bancárias.
@@ -62,7 +66,8 @@ class Conta(ABC):
             self._saldo += valor
 
             # Registra a transação no histórico com data e hora
-            self._historico.append((datetime.now), f"Depósito de R$ {valor:.2f}")
+            self._historico.append((datetime.now),
+                                   f"Depósito de R$ {valor:.2f}")
             print(f"Depósito de R$ {valor:.2f} realizado com sucesso.")
 
         else:
@@ -72,9 +77,12 @@ class Conta(ABC):
     @abstractmethod
     def sacar(self, valor: float):
 
-        """Método abstrato para sacar um valor. Deve ser implementado pelas subclasses."""
+        """
+        Método abstrato para sacar um valor.
+        Deve ser implementado pelas subclasses.
+        """
 
-        pass
+        # pass
 
     # Método para exibir o extrato da conta
     def extrato(self):
@@ -93,11 +101,57 @@ class Conta(ABC):
         for data, transacao in self._historico:
             print(f"- {data.strtime('%d/%m/%Y %H:%M:%S')}: {transacao}")
 
-        print("---------------------------\n")
+        print("---------------------------------\n")
+
+
+# Subclasse
+class ContaCorrent(Conta):
+
+    """
+    Subclasse que representa uma conta corrente.
+    Demonstra Polimorfismo ao sobrescrever o método
+    sacar feita com abstractmethod.
+    """
+
+    # Construtor com limite padrão de cheque especial
+    def __init__(self, numero: int, cliente, limite: float = 500.0):
+
+        # Chama o construtor da classe base "super classe"
+        super().__init__(numero, cliente)
+
+        # Define o limite de cheque especial
+        self.limite = limite
+
+    # Implementação do método sacar com cheque especial
+    def sacar(self, valor: float):
+
+        """
+        Permite saque utilizando o saldo da conta mais
+         o limite (cheque especial).
+        """
+
+        if valor <= 0:
+            print("Valor de saque inválido.")
+            return
+
+        # Calcula o saldo disponível (saldo + limite)
+        saldo_disponivel = self._saldo + self.limite
+
+        # Caso o valor do saque ultrapasse o saldo disponível
+        if valor > saldo_disponivel:
+            raise SaldoInsuficienteError(saldo_disponivel, valor,
+                                         "Saldo e limite insuficientes.")
+
+        # Deduz o valor do saque do saldo
+        self._saldo -= valor
+
+        # Registra a transação no histórico
+        self._historico.append((datetime.now(), f"Saque de R$ {valor:.2f}"))
+        print(f"Saque de R$ {valor:.2f} realizado com sucesso.")
 
 
 # ================= TESTE =================
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    poupanca = Conta(78, "J")
+    # poupanca = Conta(78, "J")
     # print(poupanca.)
