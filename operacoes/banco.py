@@ -7,7 +7,7 @@ que gerencia clientes e contas.
 from entidades.cliente import Cliente
 
 # Importa a classe base Conta e suas subclasses (Corrente e Poupança)
-# from entidades.conta import Conta, ContaCorrente, ContaPoupanca
+from entidades.conta import Conta, ContaCorrente, ContaPoupanca
 
 
 # Define a classe Banco
@@ -42,5 +42,43 @@ class Banco:
 
         print(f"Cliente {nome} adicionado com sucesso!")
 
+        return novo_cliente
+
+    # Método para criar uma conta para um cliente
+    def criar_conta(self, cliente: Cliente, tipo: str) -> Conta:
+
+        """Cria uma nova conta para um cliente existente."""
+
+        # Número da nova conta será baseado no total de contas + 1
+        numero_conta = Conta.get_total_contas() + 1
+
+        # Cria conta corrente se o tipo informado for "corrente"
+        if tipo.lower() == 'corrente':
+            nova_conta = ContaCorrente(numero_conta, cliente)
+
+        # Cria conta poupança se o tipo informado for "poupanca"
+        elif tipo.lower() == 'poupanca':
+            nova_conta = ContaPoupanca(numero_conta, cliente)
+
+        # Caso o tipo não seja válido
+        else:
+            print("Tipo de conta inválido. Escolha 'corrente' ou 'poupanca'.")
+            return None
+
+        # Adiciona a conta ao dicionário de contas
+        self._contas[numero_conta] = nova_conta
+
+        # Associa a conta ao cliente
+        cliente.adicionar_conta(nova_conta)
+        print(f"Conta {tipo} nº {numero_conta} criada para o cliente {cliente.nome}.")
+
+        return nova_conta
+    
+    # Método para buscar uma conta pelo número
+    
+
+
+
+        
 
 # if __name__ == "__main__":
