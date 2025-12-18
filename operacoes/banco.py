@@ -9,6 +9,9 @@ from entidades.cliente import Cliente
 # Importa a classe base Conta e suas subclasses (Corrente e Poupança)
 from entidades.conta import Conta, ContaCorrente, ContaPoupanca
 
+# Importa exceção personalizada para conta inexistente
+from utilitarios.exceptions import ContaInexistenteError
+
 
 # Define a classe Banco
 class Banco:
@@ -73,12 +76,19 @@ class Banco:
         print(f"Conta {tipo} nº {numero_conta} criada para o cliente {cliente.nome}.")
 
         return nova_conta
-    
+
     # Método para buscar uma conta pelo número
-    
+    def buscar_conta(self, numero_conta: int) -> Conta:
 
+        """Busca uma conta pelo seu número."""
 
+        # Tenta recuperar a conta do dicionário
+        conta = self._contas.get(numero_conta)
 
-        
+        # Se não encontrar, lança exceção personalizada
+        if not conta:
+            raise ContaInexistenteError(numero_conta)
+        return conta
+
 
 # if __name__ == "__main__":
