@@ -89,7 +89,7 @@ class Conta(ABC):
 
         """Exibe o extrato da conta."""
         print(f"\n--- Extrato da Conta Nº {self._numero} ---")
-        print(f"Cliente: {self._cliente.nome}")
+        print(f"Cliente: {self._cliente}")
         print(f"Saldo atual: R$ {self._saldo:.2f}")
         print("Histórico de transações:")
 
@@ -177,10 +177,3 @@ class ContaPoupanca(Conta):
         # Registra a transação no histórico
         self._historico.append((datetime.now(), f"Saque de R$ {valor:.2f}"))
         print(f"Saque de R$ {valor:.2f} realizado com sucesso.")
-
-
-# ================= TESTE =================
-# if __name__ == "__main__":
-
-    # poupanca = Conta(78, "J")
-    # print(poupanca.)

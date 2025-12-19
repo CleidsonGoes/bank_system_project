@@ -1,4 +1,5 @@
-"""Módulos para exceções customizadas da aplicação."""
+"""Módulos para exceções customizadas que são
+subclasses da classe base de Python "Exception" da aplicação."""
 
 
 # Define a exceção para saldo insuficiente em operações de saque
@@ -16,7 +17,8 @@ class SaldoInsuficienteError(Exception):
         self.valor_saque = valor_saque
 
         # Mensagem detalhada de erro com saldo atual e valor do saque
-        self.mensagem = f"{mensagem} Saldo atual: R$ {saldo_atual:.2f}, tentativa de saque: R$ {valor_saque:.2f}."
+        self.mensagem = f"{mensagem} Saldo atual: R$ {saldo_atual:.2f}, \
+            tentativa de saque: R$ {valor_saque:.2f}."
 
         # Chama o construtor da classe Exception com a mensagem
         super().__init__(self.mensagem)
@@ -26,7 +28,8 @@ class ContaInexistenteError(Exception):
 
     """Exceção levantada ao tentar operar em uma conta que não existe."""
 
-    def __init__(self, numero_conta, mensagem="A conta especificada não foi informada."):
+    def __init__(self, numero_conta, mensagem="A conta especificada\
+                  não foi informada."):
 
         # Número da conta que não foi encontrada
         self.numero_conta = numero_conta

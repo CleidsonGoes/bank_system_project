@@ -31,7 +31,4 @@ class Cliente:
 
 
 # ================= TESTE =================
-if __name__ == "__main__":
-
-    jorge = Cliente("Jorge", "768.685.987-98")
-    print(jorge)
+# if __name__ == "__main__":
