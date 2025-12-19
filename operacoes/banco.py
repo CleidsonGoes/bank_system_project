@@ -73,8 +73,7 @@ class Banco:
 
         # Associa a conta ao cliente
         cliente.adicionar_conta(nova_conta)
-        print(f"Conta {tipo} nº {numero_conta} criada para o \
-              cliente {cliente.nome}.")
+        print(f"Conta {tipo} nº {numero_conta} criada para o cliente {cliente.nome}.")
 
         return nova_conta
 
