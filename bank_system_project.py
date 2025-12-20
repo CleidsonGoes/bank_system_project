@@ -4,7 +4,8 @@ Aplicação de Sistema Bancário em Python com POO
 
 from operacoes.banco import Banco
 
-from utilitarios.exceptions import ContaInexistenteError
+from utilitarios.exceptions import ContaInexistenteError, \
+    SaldoInsuficienteError
 
 
 # Função que exige o menu principal da aplicação
@@ -23,7 +24,7 @@ def menu_principal():
 
 # Função que exibe o menu de operações de uma conta específica
 def menu_conta(banco: Banco):
-    """Função que exibe o menu de 
+    """Função que exibe o menu de
     operações de uma conta específica"""
 
     try:
@@ -59,13 +60,31 @@ def menu_conta(banco: Banco):
                 try:
 
                     valor = float(input("Digite o valor para saque: "))
-                    conta.sacar(valor) # Poliformismo: depende do tipo de conta
+                    conta.sacar(valor)  # Poliformismo: depende do tipo de conta
 
-                except
+                except SaldoInsuficienteError as e:
+                    print(f"Erro na operação: {e}")
+
+            elif opcao == '3':
+
+                # Exibe o extrato da conta
+                conta.extrato()
+
+            elif opcao == '4':
+
+                # Sai do menu da conta e retorna ao menu principal
+                break
+
+            else:
+                print("Opção inválida. Tente novamente.")
 
     # Exceção caso a conta não exista
     except ContaInexistenteError as e:
         print(f"Erro na operação: {e}")
+
+    # Exceção para entradas inválidas (não numéricas)
+    except ValueError:
+        print("Erro: Entrada inválida. Por favor, digite um número.")
 
 
 menu_principal()
