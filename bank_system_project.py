@@ -87,4 +87,29 @@ def menu_conta(banco: Banco):
         print("Erro: Entrada inválida. Por favor, digite um número.")
 
 
-menu_principal()
+# Função principal que controla o fluxo do sistema
+def main():
+
+    # Cria o objeto Banco
+    banco = Banco("Banco Digital CJ")
+
+    # Loop principal do sistema
+    while True:
+
+        opcao = menu_principal()
+
+        if opcao == '1':
+
+            # Adiciona um novo cliente
+            nome = input("Digite o nome do cliente: ")
+            cpf = input("Digite o CPF do cliente: ")
+            banco.adicionar_cliente(nome, cpf)
+
+        elif opcao == '2':
+
+            # Cria uma nova conta vinculada a um cliente existente
+            cpf = input("Digite o CPF do cliente para vincular a conta: ")
+            cliente = banco._clientes.get(cpf)
+
+            if cliente:
+                
