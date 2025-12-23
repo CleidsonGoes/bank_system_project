@@ -66,8 +66,8 @@ class Conta(ABC):
             self._saldo += valor
 
             # Registra a transação no histórico com data e hora
-            self._historico.append((datetime.now),
-                                   f"Depósito de R$ {valor:.2f}")
+            self._historico.append((datetime.now(), f"Depósito de R$ {valor:.2f}"))
+
             print(f"Depósito de R$ {valor:.2f} realizado com sucesso.")
 
         else:
@@ -99,7 +99,7 @@ class Conta(ABC):
 
         # Percorre o histórico e exibe cada transação
         for data, transacao in self._historico:
-            print(f"- {data.strtime('%d/%m/%Y %H:%M:%S')}: {transacao}")
+            print(f"- {data.strftime('%d/%m/%Y %H:%M:%S')}: {transacao}")
 
         print("---------------------------------\n")
 

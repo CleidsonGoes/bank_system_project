@@ -60,7 +60,7 @@ def menu_conta(banco: Banco):
                 try:
 
                     valor = float(input("Digite o valor para saque: "))
-                    conta.sacar(valor)  # Poliformismo: depende do tipo de conta
+                    conta.sacar(valor)  # Poliformismo:depende do tipo de conta
 
                 except SaldoInsuficienteError as e:
                     print(f"Erro na operação: {e}")
@@ -89,6 +89,7 @@ def menu_conta(banco: Banco):
 
 # Função principal que controla o fluxo do sistema
 def main():
+    """Função principal que controla o fluxo do sistema"""
 
     # Cria o objeto Banco
     banco = Banco("Banco Digital CJ")
@@ -112,4 +113,28 @@ def main():
             cliente = banco._clientes.get(cpf)
 
             if cliente:
-                
+                tipo = input("Digite o tipo da conta (corrente/poupanca):")
+
+                banco.criar_conta(cliente, tipo)
+
+            else:
+                print("Cliente não encontrado. Cadastre o cliente primeiro.")
+
+        elif opcao == '3':
+
+            # Abre o menu de operações de uma conta
+            menu_conta(banco)
+
+        elif opcao == '4':
+
+            # Encerra programa
+            print("\nObrigado por usar o nosso sistema. Até logo!\n")
+            break
+
+        else:
+            print("\nOpção inválida. Por favor, tente novamente.\n")
+
+
+# Ponto de entrada da aplicação
+if __name__ == "__main__":
+    main()
