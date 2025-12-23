@@ -40,11 +40,24 @@ class Conta(ABC):
         # Incrementa o total de contas criadas
         Conta._total_contas += 1
 
+    # Propriedade para acessar o número da conta de forma controlada
+    @property
+    def n_conta(self):
+        """Getter para atr protegido "numero", permitindo acesso controlado."""
+        return self._numero
+
+    # Propriedade para acessar o cliente de forma controlada
+    @property
+    def cliente(self):
+
+        """Getter para atr protegido "cliente", permitindo acesso controlado"""
+        return self._cliente
+
     # Propriedade para acessar o saldo de forma controlada
     @property
     def saldo(self):
 
-        """Getter para saldo, permitindo acesso controlado."""
+        """Getter para atr protegido "saldo", permitindo acesso controlado."""
         return self._saldo
 
     # Método de classe para consultar o número total de contas

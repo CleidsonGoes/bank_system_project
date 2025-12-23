@@ -31,6 +31,11 @@ class Banco:
         # Dicionário de contas (chave: número da conta, valor: objeto Conta)
         self._contas = {}
 
+    @property
+    def cliente(self):
+        """Getter para atr protegido "cliente", permitindo acesso controlado"""
+        return self._clientes
+
     # Método para adicionar um novo cliente ao banco
     def adicionar_cliente(self, nome: str, cpf: str) -> Cliente:
 

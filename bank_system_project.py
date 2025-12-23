@@ -38,8 +38,8 @@ def menu_conta(banco: Banco):
         # Loop de operações dentro da conta
         while True:
 
-            print(f"\n--- Operações para Conta Nº {conta._numero} ---")
-            print(f"Cliente: {conta._cliente} | Saldo: R${conta._saldo:.2f}")
+            print(f"\n--- Operações para Conta Nº {conta.n_conta} ---")
+            print(f"Cliente: {conta.cliente} | Saldo: R${conta.saldo:.2f}")
             print("1. Depositar")
             print("2. Sacar")
             print("3. Ver Extrato")
@@ -110,7 +110,7 @@ def main():
 
             # Cria uma nova conta vinculada a um cliente existente
             cpf = input("Digite o CPF do cliente para vincular a conta: ")
-            cliente = banco._clientes.get(cpf)
+            cliente = banco.cliente.get(cpf)
 
             if cliente:
                 tipo = input("Digite o tipo da conta (corrente/poupanca):")

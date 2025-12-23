@@ -27,7 +27,7 @@ class Cliente:
     def __str__(self):
 
         # Retorna uma string formatada com nome e CPF do cliente
-        return f"Cliente {self.nome} (CPF: {self.cpf})"
+        return f" {self.nome} (CPF: {self.cpf})"
 
 
 # ================= TESTE =================
